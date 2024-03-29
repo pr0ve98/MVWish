@@ -14,7 +14,7 @@ public class DBconn {
 	String sql = "";
 	
 	public DBconn() {
-		String url = "jdbc:mysql://localhost:3306/javaclass";
+		String url = "jdbc:mysql://localhost:3306/javaclass4";
 		String user = "root", password = "1234";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

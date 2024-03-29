@@ -55,7 +55,7 @@ public class MVW_SignUp extends JFrame {
 		
 		JLabel lblMid = new JLabel("아이디");
 		lblMid.setBounds(339, 27, 129, 38);
-		lblMid.setFont(new Font("KoPubWorld돋움체 Medium", Font.BOLD, 16));
+		lblMid.setFont(new Font("G마켓 산스 TTF Bold", Font.BOLD, 16));
 		lblMid.setForeground(new Color(255, 255, 255));
 		lblMid.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblMid);
@@ -63,40 +63,40 @@ public class MVW_SignUp extends JFrame {
 		btnSame = new JButton("중복확인");
 		btnSame.setBounds(701, 31, 82, 30);
 		btnSame.setBackground(new Color(255, 255, 255));
-		btnSame.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 12));
+		btnSame.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 12));
 		pn2.add(btnSame);
 		
 		JLabel lblPwd = new JLabel("비밀번호");
 		lblPwd.setBounds(339, 98, 129, 38);
-		lblPwd.setFont(new Font("KoPubWorld돋움체 Medium", Font.BOLD, 16));
+		lblPwd.setFont(new Font("G마켓 산스 TTF Bold", Font.BOLD, 16));
 		lblPwd.setForeground(new Color(255, 255, 255));
 		lblPwd.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblPwd);
 		
 		JLabel lblPwdOk = new JLabel("비밀번호 확인");
 		lblPwdOk.setBounds(339, 173, 129, 38);
-		lblPwdOk.setFont(new Font("KoPubWorld돋움체 Medium", Font.BOLD, 16));
+		lblPwdOk.setFont(new Font("G마켓 산스 TTF Bold", Font.BOLD, 16));
 		lblPwdOk.setForeground(new Color(255, 255, 255));
 		lblPwdOk.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblPwdOk);
 		
 		JLabel lblName = new JLabel("이름");
 		lblName.setBounds(339, 249, 129, 38);
-		lblName.setFont(new Font("KoPubWorld돋움체 Medium", Font.BOLD, 16));
+		lblName.setFont(new Font("G마켓 산스 TTF Bold", Font.BOLD, 16));
 		lblName.setForeground(new Color(255, 255, 255));
 		lblName.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblName);
 		
 		JLabel lblAge = new JLabel("나이");
 		lblAge.setBounds(339, 320, 129, 38);
-		lblAge.setFont(new Font("KoPubWorld돋움체 Medium", Font.BOLD, 16));
+		lblAge.setFont(new Font("G마켓 산스 TTF Bold", Font.BOLD, 16));
 		lblAge.setForeground(new Color(255, 255, 255));
 		lblAge.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblAge);
 		
 		JLabel lblGender = new JLabel("성별");
 		lblGender.setBounds(339, 397, 129, 38);
-		lblGender.setFont(new Font("KoPubWorld돋움체 Medium", Font.BOLD, 16));
+		lblGender.setFont(new Font("G마켓 산스 TTF Bold", Font.BOLD, 16));
 		lblGender.setForeground(new Color(255, 255, 255));
 		lblGender.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblGender);
@@ -104,78 +104,78 @@ public class MVW_SignUp extends JFrame {
 		btnInput = new JButton("가입하기");
 		btnInput.setBounds(299, 479, 174, 58);
 		btnInput.setBackground(new Color(255, 255, 255));
-		btnInput.setFont(new Font("KoPubWorld돋움체 Medium", Font.BOLD, 16));
+		btnInput.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 16));
 		pn2.add(btnInput);
 		
 		btnCancel = new JButton("취소");
 		btnCancel.setBounds(609, 479, 174, 58);
 		btnCancel.setBackground(new Color(255, 255, 255));
-		btnCancel.setFont(new Font("KoPubWorld돋움체 Medium", Font.BOLD, 16));
+		btnCancel.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 16));
 		pn2.add(btnCancel);
 		
 		txtMid = new JTextField();
 		txtMid.setBounds(560, 27, 129, 38);
-		txtMid.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 14));
+		txtMid.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 14));
 		pn2.add(txtMid);
 		txtMid.setColumns(10);
 		
 		txtName = new JTextField();
 		txtName.setBounds(560, 249, 225, 38);
-		txtName.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 14));
+		txtName.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 14));
 		txtName.setColumns(10);
 		pn2.add(txtName);
 		
 		txtAge = new JTextField();
 		txtAge.setBounds(560, 320, 225, 38);
-		txtAge.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 14));
+		txtAge.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 14));
 		txtAge.setColumns(10);
 		pn2.add(txtAge);
 		
 		cbGender = new JComboBox();
 		cbGender.setBounds(560, 397, 225, 38);
-		cbGender.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 14));
+		cbGender.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 14));
 		cbGender.setBackground(new Color(255, 255, 255));
 		cbGender.setModel(new DefaultComboBoxModel(new String[] {"표시 안함", "남자", "여자"}));
 		pn2.add(cbGender);
 		
 		pwdField = new JPasswordField();
 		pwdField.setBounds(560, 98, 223, 38);
-		pwdField.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 14));
+		pwdField.setFont(new Font("굴림", Font.PLAIN, 14));
 		pn2.add(pwdField);
 		
 		pwdOkField = new JPasswordField();
 		pwdOkField.setBounds(560, 173, 223, 38);
-		pwdOkField.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 14));
+		pwdOkField.setFont(new Font("굴림", Font.PLAIN, 14));
 		pn2.add(pwdOkField);
 		
 		lblMidError = new JLabel("※ 아이디는 4~12글자 영문대소문자, 숫자, 밑줄만 사용 가능합니다.");
-		lblMidError.setBounds(407, 65, 363, 30);
-		lblMidError.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 13));
+		lblMidError.setBounds(395, 65, 405, 30);
+		lblMidError.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 13));
 		lblMidError.setForeground(new Color(255, 0, 0));
 		pn2.add(lblMidError);
 		
 		lblPwdError = new JLabel("※ 비밀번호는 20자리까지만 가능하며 영문 대소문자/숫자/~`!@#$%^&*()_+-=만 입력할 수 있습니다.");
-		lblPwdError.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 13));
+		lblPwdError.setBounds(293, 146, 609, 15);
+		lblPwdError.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 13));
 		lblPwdError.setForeground(new Color(255, 0, 0));
-		lblPwdError.setBounds(322, 146, 533, 15);
 		pn2.add(lblPwdError);
 		
 		lblPwdOkError = new JLabel("※ 비밀번호가 같지 않습니다.");
+		lblPwdOkError.setBounds(505, 224, 184, 15);
 		lblPwdOkError.setForeground(Color.RED);
-		lblPwdOkError.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 13));
-		lblPwdOkError.setBounds(509, 224, 159, 15);
+		lblPwdOkError.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 13));
 		pn2.add(lblPwdOkError);
 		
 		lblNameError = new JLabel("※ 이름은 영문 대소문자/한글로만 입력하세요.");
+		lblNameError.setBounds(458, 297, 278, 15);
 		lblNameError.setForeground(Color.RED);
-		lblNameError.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 13));
-		lblNameError.setBounds(466, 297, 245, 15);
+		lblNameError.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 13));
 		pn2.add(lblNameError);
 		
 		lblAgeError = new JLabel("※ 나이는 숫자로만 입력하세요.");
+		lblAgeError.setBounds(503, 372, 188, 15);
 		lblAgeError.setForeground(Color.RED);
-		lblAgeError.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 13));
-		lblAgeError.setBounds(505, 372, 166, 15);
+		lblAgeError.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 13));
 		pn2.add(lblAgeError);
 		lblMidError.setVisible(false);
 		
@@ -259,7 +259,7 @@ public class MVW_SignUp extends JFrame {
 				res = JOptionPane.showConfirmDialog(null, "가입을 취소하시겠습니까?","가입 취소",JOptionPane.YES_NO_OPTION);
 				if(res == 0) {
 					dispose();
-					new MVW_Main();
+					new MVW_First();
 				}
 			}
 		});
@@ -269,7 +269,7 @@ public class MVW_SignUp extends JFrame {
 				res = JOptionPane.showConfirmDialog(null, "가입을 취소하시겠습니까?","가입 취소",JOptionPane.YES_NO_OPTION);
 				if(res == 0) {
 					dispose();
-					new MVW_Main();
+					new MVW_First();
 				}
 			}
 		});
@@ -341,7 +341,7 @@ public class MVW_SignUp extends JFrame {
 				if(res != 0) {
 					JOptionPane.showMessageDialog(null, "MVWish에 오신 걸 환영합니다!");
 					dispose();
-					new MVW_Main();
+					new MVW_First();
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "회원을 등록할 수 없어요!","회원등록 실패",JOptionPane.ERROR_MESSAGE);

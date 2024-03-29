@@ -1,13 +1,14 @@
 package mvwish;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MVW_DAO extends DBconn {
 	MVW_VO vo = null;
 
 	// 회원 아이디로 검색(중복처리)
 	public MVW_VO getMidSearch(String mid) {
-		MVW_VO vo = new MVW_VO();
+		vo = new MVW_VO();
 		try {
 			sql = "SELECT * FROM MVWuser WHERE mid=?";
 			pstmt =  conn.prepareStatement(sql);
@@ -47,5 +48,30 @@ public class MVW_DAO extends DBconn {
 			pstmtClose();
 		}
 		return res;
+	}
+
+	public ArrayList<MVW_VO> movieInput() {
+		ArrayList<MVW_VO> vos = new ArrayList<MVW_VO>();
+		try {
+			sql = "SELECT * FROM mvwmovie";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new MVW_VO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMovieName(rs.getString("moviename"));
+				vo.setRunningTime(rs.getString("runningtime"));
+				vo.setGenre(rs.getString("genre"));
+				vo.setScore(rs.getDouble("score"));
+				vo.setImg(rs.getString("img"));
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("sql 오류: "+e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vos;
 	}
 }

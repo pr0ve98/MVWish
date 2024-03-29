@@ -23,7 +23,7 @@ CREATE TABLE mvwmovie(
 	idx INT NOT NULL auto_increment PRIMARY KEY,
 	moviename VARCHAR(40) NOT NULL,
 	runningtime VARCHAR(20) NOT NULL,
-	genre VARCHAR(20) NOT NULL,
+	genre VARCHAR(40) NOT NULL,
 	score DOUBLE NOT NULL,
 	img VARCHAR(30) NOT NULL
 );
@@ -31,6 +31,7 @@ CREATE TABLE mvwmovie(
 DESC mvwmovie;
 DROP TABLE mvwmovie;
 
+INSERT INTO MVWmovie VALUES (DEFAULT,'테스트 영화','2시간 13분', '판타지/액션/스릴러', 3.5, '/mvwish/images/logo.jpg');
 SELECT * FROM mvwmovie;
 
 -- 유저가 고른 영화 테이블
