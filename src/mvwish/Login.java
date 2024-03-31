@@ -16,17 +16,18 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
-public class MVW_Login extends JFrame{
+@SuppressWarnings("serial")
+public class Login extends JFrame{
 	private JPasswordField pwdField;
 	private JTextField txtMid;
 	private JLabel lblMidError, lblPwdError;
 	private JButton btnLogin, btnCancle;
 	
-	private MVW_DAO dao = new MVW_DAO();
-	private MVW_VO vo = null;
+	private DAO dao = new DAO();
+	private VO vo = null;
 	int res = 0;
 	
-	public MVW_Login() {
+	public Login() {
 		super("MVWish! Login");
 		setSize(540, 550);
 		
@@ -39,7 +40,7 @@ public class MVW_Login extends JFrame{
 		pn1.setLayout(null);
 		
 		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon(MVW_Login.class.getResource("/mvwish/images/logo2.jpg")));
+		lblLogo.setIcon(new ImageIcon(Login.class.getResource("/mvwish/img/logo2.jpg")));
 		lblLogo.setBounds(200, 10, 125, 81);
 		pn1.add(lblLogo);
 		
@@ -127,14 +128,14 @@ public class MVW_Login extends JFrame{
 		btnCancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new MVW_First();
+				new FirstMain();
 			}
 		});
 		btnCancle.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				dispose();
-				new MVW_First();
+				new FirstMain();
 			}
 		});
 	}
@@ -161,7 +162,7 @@ public class MVW_Login extends JFrame{
 		}
 		else {
 			dispose();
-			new MVW_RealMain(vo.getMid());
+			new Main(vo.getMid());
 		}
 	}
 	

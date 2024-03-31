@@ -1,28 +1,26 @@
 package mvwish;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import java.awt.GridLayout;
-import javax.swing.ImageIcon;
-import java.awt.Font;
 
-public class MVW_First extends JFrame{
+@SuppressWarnings("serial")
+public class FirstMain extends JFrame{
 	private JButton btnSignUp, btnSignIn, btnExit;
 	private JLabel lblLogo;
 	private JLabel lblLogin;
 	
-	public MVW_First() {
+	public FirstMain() {
 		super("MVWish!");
 		setSize(1080, 720);
 		
@@ -33,7 +31,7 @@ public class MVW_First extends JFrame{
 		pn1.setLayout(null);
 		
 		lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon(MVW_First.class.getResource("/mvwish/images/logo.jpg")));
+		lblLogo.setIcon(new ImageIcon(FirstMain.class.getResource("/mvwish/img/logo.jpg")));
 		lblLogo.setForeground(new Color(255, 255, 255));
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogo.setBounds(12, 10, 225, 138);
@@ -45,7 +43,8 @@ public class MVW_First extends JFrame{
 		btnSignIn.setBounds(870, 0, 97, 23);
 		pn1.add(btnSignIn);
 		
-		btnExit = new JButton("종료");
+		btnExit = new JButton("");
+		btnExit.setIcon(new ImageIcon(FirstMain.class.getResource("/mvwish/img/exit.png")));
 		btnExit.setForeground(new Color(255, 255, 255));
 		btnExit.setBackground(new Color(255, 0, 0));
 		btnExit.setFont(new Font("G마켓 산스 TTF Light", Font.BOLD, 14));
@@ -66,7 +65,7 @@ public class MVW_First extends JFrame{
 		pn2.setLayout(null);
 		
 		lblLogin = new JLabel("");
-		lblLogin.setIcon(new ImageIcon(MVW_First.class.getResource("/mvwish/images/main.jpg")));
+		lblLogin.setIcon(new ImageIcon(FirstMain.class.getResource("/mvwish/img/main.jpg")));
 		lblLogin.setBounds(0, 0, 1064, 524);
 		pn2.add(lblLogin);
 		
@@ -82,14 +81,14 @@ public class MVW_First extends JFrame{
 		btnSignUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new MVW_SignUp();
+				new SignUp();
 			}
 		});
 		btnSignUp.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				dispose();
-				new MVW_SignUp();
+				new SignUp();
 			}
 		});
 		
@@ -97,14 +96,14 @@ public class MVW_First extends JFrame{
 		btnSignIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new MVW_Login();
+				new Login();
 			}
 		});
 		btnSignIn.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				dispose();
-				new MVW_Login();
+				new Login();
 			}
 		});
 		
@@ -123,6 +122,6 @@ public class MVW_First extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		new MVW_First();
+		new FirstMain();
 	}
 }

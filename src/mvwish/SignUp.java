@@ -19,19 +19,20 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
-public class MVW_SignUp extends JFrame {
+@SuppressWarnings({"serial","rawtypes","unchecked"})
+public class SignUp extends JFrame {
 	private JTextField txtMid, txtName, txtAge;
 	private JPasswordField pwdField, pwdOkField;
 	private JButton  btnInput, btnCancel, btnSame;
 	private JComboBox cbGender;
 	private JLabel lblMidError, lblPwdError, lblPwdOkError,lblNameError,lblAgeError;
 	
-	MVW_DAO dao = new MVW_DAO();
-	MVW_VO vo = null;
+	DAO dao = new DAO();
+	VO vo = null;
 	int res = 0, cnt = 0;
 	boolean tf = false;
 
-	public MVW_SignUp() {
+	public SignUp() {
 		super("회원가입");
 		setSize(1080, 720);
 		
@@ -42,7 +43,7 @@ public class MVW_SignUp extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(MVW_SignUp.class.getResource("/mvwish/images/logo2.jpg")));
+		lblNewLabel.setIcon(new ImageIcon(SignUp.class.getResource("/mvwish/img/logo2.jpg")));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(425, 10, 181, 83);
 		panel.add(lblNewLabel);
@@ -259,7 +260,7 @@ public class MVW_SignUp extends JFrame {
 				res = JOptionPane.showConfirmDialog(null, "가입을 취소하시겠습니까?","가입 취소",JOptionPane.YES_NO_OPTION);
 				if(res == 0) {
 					dispose();
-					new MVW_First();
+					new FirstMain();
 				}
 			}
 		});
@@ -269,7 +270,7 @@ public class MVW_SignUp extends JFrame {
 				res = JOptionPane.showConfirmDialog(null, "가입을 취소하시겠습니까?","가입 취소",JOptionPane.YES_NO_OPTION);
 				if(res == 0) {
 					dispose();
-					new MVW_First();
+					new FirstMain();
 				}
 			}
 		});
@@ -341,7 +342,7 @@ public class MVW_SignUp extends JFrame {
 				if(res != 0) {
 					JOptionPane.showMessageDialog(null, "MVWish에 오신 걸 환영합니다!");
 					dispose();
-					new MVW_First();
+					new FirstMain();
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "회원을 등록할 수 없어요!","회원등록 실패",JOptionPane.ERROR_MESSAGE);

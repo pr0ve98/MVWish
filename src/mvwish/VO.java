@@ -1,6 +1,6 @@
 package mvwish;
 
-public class MVW_VO {
+public class VO {
 	// 유저 테이블
 	private String mid;
 	private String password;
@@ -15,6 +15,11 @@ public class MVW_VO {
 	private String genre;
 	private double score;
 	private String img;
+	
+	// 위시 테이블
+	private String wishMid;
+	private int wishIdx;
+	private boolean toggle;
 	
 	public String getMid() {
 		return mid;
@@ -82,11 +87,31 @@ public class MVW_VO {
 	public void setImg(String img) {
 		this.img = img;
 	}
+	public String getWishMid() {
+		return wishMid;
+	}
+	public void setWishMid(String wishMid) {
+		this.wishMid = wishMid;
+	}
+	public int getWishIdx() {
+		return wishIdx;
+	}
+	public void setWishIdx(int wishIdx) {
+		this.wishIdx = wishIdx;
+	}
+	public boolean isToggle() {
+		return toggle;
+	}
+	public void setToggle(boolean toggle) {
+		this.toggle = toggle;
+	}
 	@Override
 	public String toString() {
-		return "MVW_VO [mid=" + mid + ", password=" + password + ", name=" + name + ", age=" + age + ", gender="
-				+ gender + ", idx=" + idx + ", movieName=" + movieName + ", runningTime=" + runningTime + ", genre="
-				+ genre + ", score=" + score + ", img=" + img + "]";
+		return "VO [mid=" + mid + ", password=" + password + ", name=" + name + ", age=" + age + ", gender=" + gender
+				+ ", idx=" + idx + ", movieName=" + movieName + ", runningTime=" + runningTime + ", genre=" + genre
+				+ ", score=" + score + ", img=" + img + ", wishMid=" + wishMid + ", wishIdx=" + wishIdx + ", toggle="
+				+ toggle + "]";
 	}
-
+	
+	
 }
