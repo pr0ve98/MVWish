@@ -35,19 +35,19 @@ public class Main extends JFrame{
 	private JButton[] btnWish = new JButton[100];
 	private JButton[] btnWishOff = new JButton[100];
 	
-	private JButton btnLogout, btnExit, btnMyPage, btnAdmin, btnGenreSearch, btnSearch;
+	private JButton btnLogout, btnExit, btnMyPage, btnAdmin, btnGenreSearch, btnSearch, btnHome;
 	private JLabel lblLogo, lblMovieStar1, lblNewLabel, lblNewLabel_1;
 	private JComboBox cbGenre;
 	private JTextField txtMovieSearch;
-	private JPanel pn2;
+	private JPanel pn2, pn2_3;
 	private JScrollPane scrollPane;
 	
 	
 	private VO vo = null;
 	private VO vo2 = null;
 	private DAO dao = new DAO();
-	ArrayList<VO> vos = dao.movieView();
-	int lblCount = vos.size();
+	ArrayList<VO> vos = null;
+	int lblCount = 0;
 	int res = 0;
 	
 	public Main(String mid) {
@@ -103,12 +103,14 @@ public class Main extends JFrame{
 		pn1.add(lblNewLabel);
 		
 		cbGenre = new JComboBox();
-		cbGenre.setModel(new DefaultComboBoxModel(new String[] {"장르 선택", "코미디", "액션", "범죄", "스릴러", "미스터리", "로맨틱 코미디", "오컬트", "공포", "하이틴", "판타지", "뮤지컬", "가족", "애니메이션", "로맨스", "SF", "모험"}));
+		cbGenre.setBackground(new Color(255, 255, 255));
+		cbGenre.setModel(new DefaultComboBoxModel(new String[] {"장르 선택", "코미디", "액션", "범죄", "스릴러", "미스터리", "로코", "오컬트", "공포", "하이틴", "판타지", "뮤지컬", "가족", "애니메이션", "로맨스", "SF", "모험"}));
 		cbGenre.setBounds(598, 60, 157, 38);
 		cbGenre.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 12));
 		pn1.add(cbGenre);
 		
 		btnGenreSearch = new JButton("장르별 검색");
+		btnGenreSearch.setBackground(new Color(255, 255, 255));
 		btnGenreSearch.setBounds(786, 67, 108, 23);
 		btnGenreSearch.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 14));
 		pn1.add(btnGenreSearch);
@@ -119,6 +121,7 @@ public class Main extends JFrame{
 		txtMovieSearch.setColumns(10);
 		
 		btnSearch = new JButton("검색");
+		btnSearch.setBackground(new Color(255, 255, 255));
 		btnSearch.setBounds(500, 67, 69, 23);
 		btnSearch.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 14));
 		pn1.add(btnSearch);
@@ -128,6 +131,12 @@ public class Main extends JFrame{
 		lblNewLabel_1.setIcon(new ImageIcon(Main.class.getResource("/mvwish/img/lbl.jpg")));
 		pn1.add(lblNewLabel_1);
 		
+		btnHome = new JButton("");
+		btnHome.setBackground(new Color(0, 0, 0));
+		btnHome.setIcon(new ImageIcon(Main.class.getResource("/mvwish/img/logo.jpg")));
+		btnHome.setBounds(12, 10, 225, 138);
+		pn1.add(btnHome);
+		
 		
 		pn2 = new JPanel();
 		pn2.setForeground(new Color(255, 255, 255));
@@ -135,6 +144,9 @@ public class Main extends JFrame{
 		pn2.setLayout(null);
 		
 		vo = dao.getMidSearch(mid);
+		
+		vos = dao.movieView();
+		lblCount = vos.size();
 		movieList();
 		
 		scrollPane = new JScrollPane(pn2);
@@ -144,8 +156,6 @@ public class Main extends JFrame{
 		scrollPane.setViewportView(pn2);
 		SwingUtilities.invokeLater(() -> scrollPane.getViewport().setViewPosition(new Point(0, 0))); // 스크롤바 첫 위치 제일 위로 고정
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16); // 마우스 휠 한번에 움직일 스크롤바 픽셀 수 지정
-
-		
 		
 		// 버튼 숨김
 		btnAdmin.setVisible(false);
@@ -159,6 +169,7 @@ public class Main extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		getContentPane().setLayout(null);
+		setVisible(true);
 		
 		// 종료버튼
 		btnExit.addActionListener(new ActionListener() {
@@ -210,9 +221,100 @@ public class Main extends JFrame{
 				new UserWish(mid);
 			}
 		});
+		btnMyPage.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				dispose();
+				new UserWish(mid);
+			}
+		});
+		
+		// 검색창에서 엔터로 검색
+		txtMovieSearch.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					pn2.removeAll();
+					String txt = txtMovieSearch.getText().trim();
+					vos = dao.txtSearch(txt);
+					lblCount = vos.size();
+					movieList();
+							
+					// 초기화 작업
+					pn2.revalidate(); // 컴포넌트 재배치
+					pn2.repaint(); // 다시 그리기
+					txtMovieSearch.setText("");
+				}
+			}
+		});
+		// 검색버튼 사용
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pn2.removeAll();
+				String txt = txtMovieSearch.getText().trim();
+				vos = dao.txtSearch(txt);
+				lblCount = vos.size();
+				movieList();
+				
+				// 초기화 작업
+				pn2.revalidate(); // 컴포넌트 재배치
+			    pn2.repaint(); // 다시 그리기
+			    txtMovieSearch.setText("");
+			}
+		});
+		btnSearch.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				pn2.removeAll();
+				String txt = txtMovieSearch.getText().trim();
+				vos = dao.txtSearch(txt);
+				lblCount = vos.size();
+				movieList();
+				
+				// 초기화 작업
+				pn2.revalidate(); // 컴포넌트 재배치
+			    pn2.repaint(); // 다시 그리기
+			    txtMovieSearch.setText("");
+			}
+		});
+		
+		// 장르 검색 버튼
+		btnGenreSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pn2.removeAll();
+				String genre = cbGenre.getSelectedItem().toString();
+				vos = dao.genreSearch(genre);
+				lblCount = vos.size();
+				movieList();
+				pn2.revalidate(); // 컴포넌트 재배치
+			    pn2.repaint(); // 다시 그리기
+			    SwingUtilities.invokeLater(() -> scrollPane.getViewport().setViewPosition(new Point(0, 0))); // 스크롤바 첫 위치 제일 위로 고정
+			}
+		});
 		
 		
-		setVisible(true);
+		// 홉 버튼
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pn2.removeAll();
+				vos = dao.movieView();
+				lblCount = vos.size();
+				movieList();
+				pn2.revalidate(); // 컴포넌트 재배치
+			    pn2.repaint(); // 다시 그리기
+			    SwingUtilities.invokeLater(() -> scrollPane.getViewport().setViewPosition(new Point(0, 0))); // 스크롤바 첫 위치 제일 위로 고정
+			}
+		});
+		btnHome.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				pn2.removeAll();
+				vos = dao.movieView();
+				lblCount = vos.size();
+				movieList();
+				pn2.revalidate(); // 컴포넌트 재배치
+			    pn2.repaint(); // 다시 그리기
+			    SwingUtilities.invokeLater(() -> scrollPane.getViewport().setViewPosition(new Point(0, 0))); // 스크롤바 첫 위치 제일 위로 고정
+			}
+		});
+		
+		
 	}
 	
 	// DB에서 영화정보 가져온만큼 레이아웃 추가하는 메소드
@@ -239,13 +341,13 @@ public class Main extends JFrame{
 			lblMovieStar1.setBounds(x, yS+1, 24, 24);
 			lblMovieStar1.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 20));
 			lblMovieStar1.setForeground(new Color(255, 204, 0));
-			// 평점ㅁ
+			// 평점
 			lblMovieScore[i] = new JLabel(String.valueOf(vos.get(i).getScore()));
 			lblMovieScore[i].setBounds(xS, yS+1, 50, 24);
 			lblMovieScore[i].setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 20));
 			lblMovieScore[i].setForeground(new Color(255, 255, 255));
 			// 러닝타임
-			lblMovieRT[i] = new JLabel(vos.get(i).getRunningTime());
+			lblMovieRT[i] = new JLabel();
 			lblMovieRT[i].setBounds(xR, yS+3, 107, 24);
 			lblMovieRT[i].setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 15));
 			lblMovieRT[i].setHorizontalAlignment(SwingConstants.CENTER);

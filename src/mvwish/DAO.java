@@ -259,4 +259,56 @@ public class DAO extends DBconn {
 		return vo;
 	}
 
+	public ArrayList<VO> txtSearch(String txt) {
+		ArrayList<VO> vos = new ArrayList<VO>();
+		try {
+			sql = "SELECT * FROM MVWmovie WHERE moviename LIKE ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+txt+"%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new VO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMovieName(rs.getString("moviename"));
+				vo.setRunningTime(rs.getString("runningtime"));
+				vo.setGenre(rs.getString("genre"));
+				vo.setScore(rs.getDouble("score"));
+				vo.setImg(rs.getString("img"));
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("sql 오류: "+e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vos;
+	}
+
+	public ArrayList<VO> genreSearch(String genre) {
+		ArrayList<VO> vos = new ArrayList<VO>();
+		try {
+			sql = "SELECT * FROM MVWmovie WHERE genre LIKE ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+genre+"%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new VO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMovieName(rs.getString("moviename"));
+				vo.setRunningTime(rs.getString("runningtime"));
+				vo.setGenre(rs.getString("genre"));
+				vo.setScore(rs.getDouble("score"));
+				vo.setImg(rs.getString("img"));
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("sql 오류: "+e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vos;
+	}
+
 }
