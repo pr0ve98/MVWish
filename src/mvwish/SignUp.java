@@ -285,6 +285,7 @@ public class SignUp extends JFrame {
 			lblMidError.setVisible(true);
 			txtMid.setText("");
 			txtMid.requestFocus();
+			tf = false;
 		}
 		// 중복 체크
 		else if(vo.getMid() != null) {
@@ -292,6 +293,7 @@ public class SignUp extends JFrame {
 			JOptionPane.showMessageDialog(null, "이미 등록된 아이디입니다. 다른 아이디를 입력하세요.");
 			txtMid.setText("");
 			txtMid.requestFocus();
+			tf = false;
 		}
 		else tf = true;
 		return tf;

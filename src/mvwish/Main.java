@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -35,11 +36,11 @@ public class Main extends JFrame{
 	private JButton[] btnWish = new JButton[100];
 	private JButton[] btnWishOff = new JButton[100];
 	
-	private JButton btnLogout, btnExit, btnMyPage, btnAdmin, btnGenreSearch, btnSearch, btnHome;
-	private JLabel lblLogo, lblMovieStar1, lblNewLabel, lblNewLabel_1;
+	private JButton btnLogout, btnExit, btnMyPage, btnAdmin, btnGenreSearch, btnSearch, btnHome, btnWishRank;
+	private JLabel lblLogo, lblMovieStar1, lblNewLabel, lblNewLabel_1, lblMovieRank;
 	private JComboBox cbGenre;
 	private JTextField txtMovieSearch;
-	private JPanel pn2, pn2_3;
+	private JPanel pn2;
 	private JScrollPane scrollPane;
 	
 	
@@ -69,13 +70,14 @@ public class Main extends JFrame{
 		pn1.add(lblLogo);
 		
 		btnMyPage = new JButton("My Wish");
-		btnMyPage.setBounds(773, 0, 97, 23);
+		btnMyPage.setIcon(new ImageIcon(Main.class.getResource("/mvwish/img/heart2.png")));
+		btnMyPage.setBounds(926, 125, 126, 23);
 		btnMyPage.setBackground(new Color(255, 255, 255));
-		btnMyPage.setFont(new Font("G마켓 산스 TTF Light", Font.PLAIN, 14));
+		btnMyPage.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 14));
 		pn1.add(btnMyPage);
 		
 		btnAdmin = new JButton("관리자 모드");
-		btnAdmin.setBounds(950, 125, 114, 23);
+		btnAdmin.setBounds(800, 125, 114, 23);
 		btnAdmin.setBackground(new Color(255, 255, 255));
 		btnAdmin.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 14));
 		pn1.add(btnAdmin);
@@ -96,7 +98,7 @@ public class Main extends JFrame{
 		
 		lblNewLabel = new JLabel(mid+"님 환영합니다!");
 		lblNewLabel.setIcon(new ImageIcon(Main.class.getResource("/mvwish/img/userIcon.png")));
-		lblNewLabel.setBounds(469, 1, 292, 23);
+		lblNewLabel.setBounds(569, 1, 292, 23);
 		lblNewLabel.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 15));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
@@ -105,13 +107,13 @@ public class Main extends JFrame{
 		cbGenre = new JComboBox();
 		cbGenre.setBackground(new Color(255, 255, 255));
 		cbGenre.setModel(new DefaultComboBoxModel(new String[] {"장르 선택", "코미디", "액션", "범죄", "스릴러", "미스터리", "로코", "오컬트", "공포", "하이틴", "판타지", "뮤지컬", "가족", "애니메이션", "로맨스", "SF", "모험"}));
-		cbGenre.setBounds(598, 60, 157, 38);
+		cbGenre.setBounds(369, 113, 114, 24);
 		cbGenre.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 12));
 		pn1.add(cbGenre);
 		
 		btnGenreSearch = new JButton("장르별 검색");
 		btnGenreSearch.setBackground(new Color(255, 255, 255));
-		btnGenreSearch.setBounds(786, 67, 108, 23);
+		btnGenreSearch.setBounds(494, 113, 108, 23);
 		btnGenreSearch.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 14));
 		pn1.add(btnGenreSearch);
 		
@@ -137,6 +139,12 @@ public class Main extends JFrame{
 		btnHome.setBounds(12, 10, 225, 138);
 		pn1.add(btnHome);
 		
+		btnWishRank = new JButton("인기 순위");
+		btnWishRank.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 14));
+		btnWishRank.setBackground(Color.WHITE);
+		btnWishRank.setBounds(249, 113, 108, 23);
+		pn1.add(btnWishRank);
+		
 		
 		pn2 = new JPanel();
 		pn2.setForeground(new Color(255, 255, 255));
@@ -148,6 +156,14 @@ public class Main extends JFrame{
 		vos = dao.movieView();
 		lblCount = vos.size();
 		movieList();
+		
+		lblMovieRank = new JLabel("  영화 인기리스트");
+		lblMovieRank.setIcon(new ImageIcon(UserWish.class.getResource("/mvwish/img/rank.png")));
+		lblMovieRank.setForeground(new Color(255, 255, 255));
+		lblMovieRank.setFont(new Font("G마켓 산스 TTF Bold", Font.PLAIN, 30));
+		lblMovieRank.setBounds(39, 22, 869, 41);
+		pn2.add(lblMovieRank);
+		lblMovieRank.setVisible(false);
 		
 		scrollPane = new JScrollPane(pn2);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -170,6 +186,7 @@ public class Main extends JFrame{
 		setResizable(false);
 		getContentPane().setLayout(null);
 		setVisible(true);
+		// ----------------------------------- 아래쪽은 메소드 ----------------------------------------
 		
 		// 종료버튼
 		btnExit.addActionListener(new ActionListener() {
@@ -234,14 +251,17 @@ public class Main extends JFrame{
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 					pn2.removeAll();
 					String txt = txtMovieSearch.getText().trim();
-					vos = dao.txtSearch(txt);
-					lblCount = vos.size();
-					movieList();
-							
-					// 초기화 작업
-					pn2.revalidate(); // 컴포넌트 재배치
-					pn2.repaint(); // 다시 그리기
-					txtMovieSearch.setText("");
+					if(txt.equals("")) JOptionPane.showMessageDialog(null, "검색할 내용을 입력하세요.");
+					else {
+						vos = dao.txtSearch(txt);
+						lblCount = vos.size();
+						movieList();
+								
+						// 초기화 작업
+						pn2.revalidate(); // 컴포넌트 재배치
+						pn2.repaint(); // 다시 그리기
+						txtMovieSearch.setText("");
+					}
 				}
 			}
 		});
@@ -250,28 +270,81 @@ public class Main extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				pn2.removeAll();
 				String txt = txtMovieSearch.getText().trim();
-				vos = dao.txtSearch(txt);
-				lblCount = vos.size();
-				movieList();
-				
-				// 초기화 작업
-				pn2.revalidate(); // 컴포넌트 재배치
-			    pn2.repaint(); // 다시 그리기
-			    txtMovieSearch.setText("");
+				if(txt.equals("")) JOptionPane.showMessageDialog(null, "검색할 내용을 입력하세요.");
+				else {
+					vos = dao.txtSearch(txt);
+					lblCount = vos.size();
+					movieList();
+					
+					// 초기화 작업
+					pn2.revalidate(); // 컴포넌트 재배치
+				    pn2.repaint(); // 다시 그리기
+				    txtMovieSearch.setText("");
+				}
 			}
 		});
 		btnSearch.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				pn2.removeAll();
 				String txt = txtMovieSearch.getText().trim();
-				vos = dao.txtSearch(txt);
-				lblCount = vos.size();
-				movieList();
+				if(txt.equals("")) JOptionPane.showMessageDialog(null, "검색할 내용을 입력하세요.");
+				else {
+					vos = dao.txtSearch(txt);
+					lblCount = vos.size();
+					movieList();
+					
+					// 초기화 작업
+					pn2.revalidate(); // 컴포넌트 재배치
+					pn2.repaint(); // 다시 그리기
+					txtMovieSearch.setText("");
+					
+				}
+			}
+		});
+		
+		// 인기순위 버튼
+		btnWishRank.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<VO> rank = new ArrayList<VO>();
+				vos = new ArrayList<VO>();
+				pn2.removeAll();
+				pn2.add(lblMovieRank);
 				
-				// 초기화 작업
+				rank = dao.getWishRank();
+				lblCount = rank.size();
+				for(int i=0; i<rank.size(); i++) {
+					int rankIdx = rank.get(i).getWishIdx();
+					vo = dao.movieSearch(rankIdx);
+					vo.setMid(mid);
+					vos.add(vo);
+				}
+				movieList();
 				pn2.revalidate(); // 컴포넌트 재배치
 			    pn2.repaint(); // 다시 그리기
-			    txtMovieSearch.setText("");
+			    lblMovieRank.setVisible(true);
+			    SwingUtilities.invokeLater(() -> scrollPane.getViewport().setViewPosition(new Point(0, 0))); // 스크롤바 첫 위치 제일 위로 고정
+			}
+		});
+		btnWishRank.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				ArrayList<VO> rank = new ArrayList<VO>();
+				vos = new ArrayList<VO>();
+				pn2.removeAll();
+				pn2.add(lblMovieRank);
+				
+				rank = dao.getWishRank();
+				lblCount = rank.size();
+				for(int i=0; i<rank.size(); i++) {
+					int rankIdx = rank.get(i).getWishIdx();
+					vo = dao.movieSearch(rankIdx);
+					vo.setMid(mid);
+					vos.add(vo);
+				}
+				movieList();
+				pn2.revalidate(); // 컴포넌트 재배치
+			    pn2.repaint(); // 다시 그리기
+			    lblMovieRank.setVisible(true);
+			    SwingUtilities.invokeLater(() -> scrollPane.getViewport().setViewPosition(new Point(0, 0))); // 스크롤바 첫 위치 제일 위로 고정
 			}
 		});
 		
@@ -342,12 +415,12 @@ public class Main extends JFrame{
 			lblMovieStar1.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 20));
 			lblMovieStar1.setForeground(new Color(255, 204, 0));
 			// 평점
-			lblMovieScore[i] = new JLabel(String.valueOf(vos.get(i).getScore()));
+			lblMovieScore[i] = new JLabel(String.valueOf((int)vos.get(i).getScore()));
 			lblMovieScore[i].setBounds(xS, yS+1, 50, 24);
 			lblMovieScore[i].setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 20));
 			lblMovieScore[i].setForeground(new Color(255, 255, 255));
 			// 러닝타임
-			lblMovieRT[i] = new JLabel();
+			lblMovieRT[i] = new JLabel(vos.get(i).getRunningTime());
 			lblMovieRT[i].setBounds(xR, yS+3, 107, 24);
 			lblMovieRT[i].setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 15));
 			lblMovieRT[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -434,7 +507,6 @@ public class Main extends JFrame{
 			}
 		}
 	}
-	
 //	public static void main(String[] args) {
 //		new Main("admin");
 //	}

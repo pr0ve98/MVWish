@@ -104,6 +104,7 @@ public class DAO extends DBconn {
 		return vData;
 	}
 	
+	// 영화 idx로 검색
 	public VO movieSearch(int idx) {
 		vo = new VO();
 		try {
@@ -164,6 +165,7 @@ public class DAO extends DBconn {
 		return res;
 	}
 
+	// 영화 편집
 	public int movieEdit(VO vo) {
 		int res = 0;
 		try {
@@ -184,6 +186,7 @@ public class DAO extends DBconn {
 		return res;
 	}
 
+	// 위시 등록
 	public int userWishMovie(String mid, int movieIdx) {
 		int res = 0;
 		try {
@@ -200,6 +203,7 @@ public class DAO extends DBconn {
 		return res;
 	}
 
+	// 아이디별 위시리스트
 	public ArrayList<VO> movieWishView(String mid) {
 		ArrayList<VO> vos = new ArrayList<VO>();
 		try {
@@ -222,6 +226,7 @@ public class DAO extends DBconn {
 		return vos;
 	}
 
+	// 위시 삭제
 	public int userWishMovieDelete(String mid, int movieIdx) {
 		int res = 0;
 		try {
@@ -238,6 +243,7 @@ public class DAO extends DBconn {
 		return res;
 	}
 
+	// 위시 테이블에 있나 확인
 	public VO getWish(String mid, int movieIdx) {
 		vo = new VO();
 		try {
@@ -259,6 +265,7 @@ public class DAO extends DBconn {
 		return vo;
 	}
 
+	// 영화 제목으로 검색
 	public ArrayList<VO> txtSearch(String txt) {
 		ArrayList<VO> vos = new ArrayList<VO>();
 		try {
@@ -285,6 +292,7 @@ public class DAO extends DBconn {
 		return vos;
 	}
 
+	// 영화 장르 검색
 	public ArrayList<VO> genreSearch(String genre) {
 		ArrayList<VO> vos = new ArrayList<VO>();
 		try {
@@ -303,6 +311,32 @@ public class DAO extends DBconn {
 				vo.setImg(rs.getString("img"));
 				vos.add(vo);
 			}
+		} catch (SQLException e) {
+			System.out.println("sql 오류: "+e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vos;
+	}
+
+	// 영화 인기차트
+	public ArrayList<VO> getWishRank() {
+		ArrayList<VO> vos = new ArrayList<VO>();
+		try {
+			sql = "SELECT mid, idx, count(idx) AS cnt FROM MVWuserlike GROUP BY idx ORDER BY cnt DESC";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			int cnt=0;
+			while(rs.next()) {
+				if(cnt >= 10) break;
+				vo = new VO();
+				vo.setWishIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vos.add(vo);
+				cnt++;
+			}
+			
 		} catch (SQLException e) {
 			System.out.println("sql 오류: "+e.getMessage());
 		} finally {

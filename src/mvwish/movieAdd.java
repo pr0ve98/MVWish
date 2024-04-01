@@ -15,11 +15,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 @SuppressWarnings("serial")
 public class movieAdd extends JFrame {
-	private JTextField txtName, txtRT, txtGenre, txtScore, txtImg;
-	JButton btnAdd, btnExit;
+	private JTextField txtName, txtRT, txtGenre, txtImg;
+	private JButton btnAdd, btnExit;
+	private JComboBox cbScore;
 	
 	DAO dao = new DAO();
 	VO vo = new VO();
@@ -86,14 +89,8 @@ public class movieAdd extends JFrame {
 		txtGenre = new JTextField();
 		txtGenre.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 15));
 		txtGenre.setColumns(10);
-		txtGenre.setBounds(285, 241, 164, 38);
+		txtGenre.setBounds(285, 242, 164, 38);
 		pn1.add(txtGenre);
-		
-		txtScore = new JTextField();
-		txtScore.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 15));
-		txtScore.setColumns(10);
-		txtScore.setBounds(285, 289, 164, 38);
-		pn1.add(txtScore);
 		
 		txtImg = new JTextField();
 		txtImg.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 15));
@@ -105,6 +102,12 @@ public class movieAdd extends JFrame {
 		lblLogo.setIcon(new ImageIcon(movieAdd.class.getResource("/mvwish/img/logo2.jpg")));
 		lblLogo.setBounds(194, 24, 130, 83);
 		pn1.add(lblLogo);
+		
+		cbScore = new JComboBox();
+		cbScore.setModel(new DefaultComboBoxModel(new String[] {"10", "9", "8", "7", "6", "5", "4", "3", "2", "1", "0"}));
+		cbScore.setFont(new Font("G마켓 산스 TTF Medium", Font.PLAIN, 15));
+		cbScore.setBounds(285, 289, 164, 38);
+		pn1.add(cbScore);
 		
 		JPanel pn2 = new JPanel();
 		pn2.setBackground(new Color(0, 0, 0));
@@ -135,7 +138,6 @@ public class movieAdd extends JFrame {
 		// 영화 등록
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(txtScore.getText().equals("")) txtScore.setText("0.0");
 				if(txtRT.getText().equals("")) txtRT.setText("미정");
 				if(txtGenre.getText().equals("")) txtGenre.setText("미정");
 				if(txtImg.getText().equals("")) txtImg.setText("미정.jpg");
@@ -145,7 +147,6 @@ public class movieAdd extends JFrame {
 		btnAdd.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(txtScore.getText().equals("")) txtScore.setText("0.0");
 				if(txtRT.getText().equals("")) txtRT.setText("미정");
 				if(txtGenre.getText().equals("")) txtGenre.setText("미정");
 				if(txtImg.getText().equals("")) txtImg.setText("미정.jpg");
@@ -174,7 +175,7 @@ public class movieAdd extends JFrame {
 		String name = txtName.getText();
 		String rt = txtRT.getText();
 		String genre = txtGenre.getText();
-		Double score = Double.parseDouble(txtScore.getText());
+		int score = Integer.parseInt(cbScore.getSelectedItem().toString());
 		String img = txtImg.getText();
 		
 		if(name.equals("")) JOptionPane.showMessageDialog(null, "영화 제목을 입력하세요.");
@@ -190,7 +191,6 @@ public class movieAdd extends JFrame {
 				txtName.setText("");
 				txtRT.setText("");
 				txtGenre.setText("");
-				txtScore.setText("");
 				txtImg.setText("");
 				txtName.requestFocus();
 			}
@@ -198,8 +198,4 @@ public class movieAdd extends JFrame {
 		}
 		
 	}
-	
-//	public static void main(String[] args) {
-//		new movieAdd();
-//	}
 }

@@ -114,8 +114,10 @@ public class UserWish extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		getContentPane().setLayout(null);
+		setVisible(true);
+		// ----------------------------------- 아래쪽은 메소드 ----------------------------------------
 		
-		// My Wish 버튼
+		// 메인으로 버튼
 		btnMyPage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -130,7 +132,6 @@ public class UserWish extends JFrame{
 		});
 		
 		
-		setVisible(true);
 	}
 	
 	// DB에서 영화정보 가져온만큼 레이아웃 추가하는 메소드
@@ -240,7 +241,7 @@ public class UserWish extends JFrame{
 		}
 	}
 	
-	public static void main(String[] args) {
-		new Main("user1");
-	}
+//	public static void main(String[] args) {
+//		new Main("user1");
+//	}
 }

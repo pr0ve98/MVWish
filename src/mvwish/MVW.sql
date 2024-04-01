@@ -45,3 +45,6 @@ DESC MVWuserlike;
 DROP TABLE MVWuserlike;
 
 SELECT * FROM MVWuserlike;
+
+
+select mid, idx, count(idx) as cnt from MVWuserlike group by idx order by cnt desc;
